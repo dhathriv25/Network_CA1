@@ -8,7 +8,7 @@
               "ImageId": {
                   "Fn::Sub": "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}"
               },
-              "KeyName": "Security-key",
+              "KeyName": "Private-key",
               "InstanceType": "t2.micro",
               "IamInstanceProfile": "EC2-CloudFormation-Role",
               "SecurityGroupIds": [{ "Fn::GetAtt": ["WebServerSecurityGroup", "GroupId"] }],
@@ -24,6 +24,7 @@
               "SecurityGroupIngress": [
                   { "IpProtocol": "tcp", "FromPort": 22, "ToPort": 22, "CidrIp": "0.0.0.0/0" },
                   { "IpProtocol": "tcp", "FromPort": 80, "ToPort": 80, "CidrIp": "0.0.0.0/0" }
+                  { "IpProtocol": "tcp", "FromPort": 8080, "ToPort": 8080, "CidrIp": "0.0.0.0/0" }
               ]
           }
       }
