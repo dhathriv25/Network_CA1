@@ -1,0 +1,37 @@
+{
+  "Description": "CloudFormation script to set up an EC2 instance in AWS with Docker installed, using an IAM Role.",
+  "Resources": {
+      "WebServerInstance": {
+          "Type": "AWS::EC2::Instance",
+          "Properties": {
+              "AvailabilityZone": { "Fn::Select": [ 0, { "Fn::GetAZs": "" } ] },
+              "ImageId": {
+                  "Fn::Sub": "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}"
+              },
+              "KeyName": "Security-key",
+              "InstanceType": "t2.micro",
+              "IamInstanceProfile": "EC2-CloudFormation-Role",
+              "SecurityGroupIds": [{ "Fn::GetAtt": ["WebServerSecurityGroup", "GroupId"] }],
+              "UserData": { 
+                  "Fn::Base64": "#!/bin/bash\n yum update -y >> /var/log/cloud-init.log 2>&1\n yum install -y docker >> /var/log/cloud-init.log 2>&1\n systemctl start docker\n systemctl enable docker\n usermod -aG docker ec2-user" 
+              }
+          }
+      },
+      "WebServerSecurityGroup": {
+          "Type": "AWS::EC2::SecurityGroup",
+          "Properties": {
+              "GroupDescription": "Enable SSH and HTTP access",
+              "SecurityGroupIngress": [
+                  { "IpProtocol": "tcp", "FromPort": 22, "ToPort": 22, "CidrIp": "0.0.0.0/0" },
+                  { "IpProtocol": "tcp", "FromPort": 80, "ToPort": 80, "CidrIp": "0.0.0.0/0" }
+              ]
+          }
+      }
+  },
+  "Outputs": {
+      "InstancePublicIp": {
+          "Description": "This is the Public IP address of the newly created EC2 instance.",
+          "Value": { "Fn::GetAtt": ["WebServerInstance", "PublicIp"] }
+      }
+  }
+}

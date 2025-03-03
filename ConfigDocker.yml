@@ -1,0 +1,35 @@
+---
+- name: Install and Configure Docker on EC2
+  hosts: webserver
+  become: yes
+  tasks:
+    - name: Clean YUM cache
+      command: yum clean all
+
+    - name: Update all installed packages
+      command: yum -y update
+
+    - name: Install Docker
+      yum:
+        name: docker
+        state: present
+
+    - name: Start and Enable Docker Service
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add ec2-user to Docker group
+      user:
+        name: ec2-user
+        groups: docker
+        append: yes
+
+    - name: Verify Docker Installation
+      shell: docker --version
+      register: docker_version
+
+    - name: Display Docker Version
+      debug:
+        msg: "{{ docker_version.stdout }}"
