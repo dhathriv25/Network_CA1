@@ -57,7 +57,7 @@ jobs:
 
       - name: Run Ansible Playbook
         run: |
-          ansible-playbook -i NetworkSec.ini flask-app/deploy_flask.yml --extra-vars "ansible_python_interpreter=/usr/bin/python3"
+          ansible-playbook -i NetworkSec.ini flask-app/deploy_flask.yml"
           if [ $? -ne 0 ]; then
             echo "Ansible playbook execution failed!"
             exit 1
