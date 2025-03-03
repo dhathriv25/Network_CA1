@@ -57,7 +57,7 @@ jobs:
 
       - name: Run Ansible Playbook
         run: |
-          ansible-playbook -i NetworkSec.ini flask-app/deploy_flask.yml"
+          ansible-playbook -i NetworkSec.ini flask-app/deploy_flask.yml
           if [ $? -ne 0 ]; then
             echo "Ansible playbook execution failed!"
             exit 1
