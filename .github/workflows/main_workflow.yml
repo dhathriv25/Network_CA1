@@ -17,11 +17,10 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt update
-          sudo apt install -y python3
-          sudo apt install -y python3-pip
+          sudo apt install -y python3 python3-pip
           sudo pip3 install ansible
-          /usr/local/bin/python3.8 -m pip install boto3
           pip3 install boto3 botocore
+
 
       - name: Setup AWS CLI
         run: |
