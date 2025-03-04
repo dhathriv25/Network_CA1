@@ -3,75 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Image Generator</title>
+    <title>Image Generator</title>
     <style>
+        /* General body styles */
         body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
+            margin: 2%;
+            font-family:'Papyrus', fantasy;
             display: flex;
-            flex-direction: column;
+            justify-content: center; /* Center horizontally */
+            align-items: center;     /* Center vertically */
+            height: fit-content;           /* Full viewport height */
+            flex-direction: column;  /* Stack content vertically */
+            text-align: center;      /* Center text */
+        }
+
+        /* Container for image */
+        #imageContainer {
+            margin-top: 2%;
+            width: fit-content;
+            display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100px;
         }
+
+        #imageContainer img {
+            max-width: 100%;  /* Makes the image responsive */
+            max-height: 90vh;  /* Limits the height to 90% of the viewport height */
+            object-fit: contain;  /* Ensures the image retains its aspect ratio */
+        }
+
+        /* Style the heading */
         h1 {
-            color: #333;
-        }
-        img {
-            width: 80%;
-            max-width: 500px;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #45a049;
+            font-size: 2em;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
+    <h1>Hurray!! We completed our Network CA1</h1>
 
-    <div class="container">
-        <h1>Random Image Generator</h1>
-        <img id="randomImage" src="" alt="Random Image">
-        <button onclick="generateRandomImage()">Generate Random Image</button>
+    <div id="imageContainer">
+        <!-- The random image will be displayed here -->
     </div>
 
     <script>
+        // Array of image URLs (local images in the 'images' folder)
         const images = [
-            'https://source.unsplash.com/500x500/?nature',
-            'https://source.unsplash.com/500x500/?technology',
-            'https://source.unsplash.com/500x500/?animals',
-            'https://source.unsplash.com/500x500/?food',
-            'https://source.unsplash.com/500x500/?city',
-            'https://source.unsplash.com/500x500/?beach',
-            'https://source.unsplash.com/500x500/?mountain'
+            "https://media3.giphy.com/media/65HR2UL6nn6XMSUoRA/giphy.gif?cid=6c09b952pb6noci7ya5qoltshnmshssypjy6hzs75ddyffht&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g",
+            "https://media1.giphy.com/media/l49JY8n2jOsXYVXLq/giphy.gif?cid=6c09b952mddvq5ph1x81dqnwr7x2vonaj2j8pnuwe2w46uch&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g",   
+            "https://media2.giphy.com/media/NT0J3J6lUeOgVU70aU/giphy.gif?cid=6c09b9524a683dec75ez98mhl7ojtdq13nnhrxsrhrr6hap5&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g",
+            "https://media4.giphy.com/media/J65pdOUXTyG1q/giphy.gif?cid=6c09b9524hmatg6dp018uyawqiwyrqfbae2n1dqufhqizhtb&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g",
+            "https://media2.giphy.com/media/kyLYXonQYYfwYDIeZl/giphy.gif?cid=6c09b9529tfbq7lqyfswego0mlrhzvjzz6v9cbybmdvw5mbu&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g",
+            "https://media0.giphy.com/media/t2sKa4JKNW9DawxAYi/giphy.gif?cid=6c09b952810qdlb8f6dcbthk8xzq5eek4gqrwnp10owrkvja&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g"
         ];
 
+        // Function to generate a random image
         function generateRandomImage() {
+            // Get a random index from the images array
             const randomIndex = Math.floor(Math.random() * images.length);
-            const imageUrl = images[randomIndex];
-            document.getElementById('randomImage').src = imageUrl;
+            const randomImageUrl = images[randomIndex];
+
+            // Debug: Log the image URL to ensure it's correct
+            console.log("Selected Image URL: " + randomImageUrl);
+
+            // Create an img element and set its src attribute
+            const imgElement = document.createElement("img");
+            imgElement.src = randomImageUrl;
+            imgElement.alt = "Random Image";
+
+            // Check if image is being added to the container
+            imgElement.onload = function() {
+                console.log("Image loaded successfully.");
+            };
+
+            imgElement.onerror = function() {
+                console.error("Failed to load image.");
+            };
+
+            // Get the container to display the image
+            const imageContainer = document.getElementById("imageContainer");
+
+            // Clear any previous image and append the new one
+            imageContainer.innerHTML = "";
+            imageContainer.appendChild(imgElement);
         }
 
-        // Generate a random image on page load
+        // Call the function to generate and display a random image when the page loads
         window.onload = generateRandomImage;
     </script>
-
 </body>
 </html>
