@@ -16,8 +16,11 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          sudo apt update
-          sudo apt install -y ansible unzip python3-pip
+          sudo yum update
+          sudo yum install -y python3
+          sudo yum install -y python3-pip
+          sudo pip3 install ansible
+          /usr/local/bin/python3.8 -m pip install boto3
           pip3 install boto3 botocore
 
       - name: Setup AWS CLI
@@ -57,7 +60,7 @@ jobs:
 
       - name: Run Ansible Playbook
         run: |
-          ansible-playbook -i NetworkSec.ini flask-app/deploy_flask.yml
+          ansible-playbook -i NetworkSec.ini flask-app/deploy_flask.yml -e ansible_python_interpreter=/usr/local/bin/python3.8
           if [ $? -ne 0 ]; then
             echo "Ansible playbook execution failed!"
             exit 1
