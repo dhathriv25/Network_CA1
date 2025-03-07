@@ -55,4 +55,4 @@
     
     - name: Run Flask app in a container
       command:
-        cmd: docker run -d -p 80:80 --name my-flask-app flask-app
+        cmd: docker run -d -p 8080:8080 --name my-flask-app flask-app
