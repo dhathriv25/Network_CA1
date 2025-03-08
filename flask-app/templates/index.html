@@ -3,58 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Generator</title>
+    <title>Network CA1 March 2025</title>
     <style>
         /* General body styles */
         body {
-            margin: 2%;
-            font-family:'Papyrus', fantasy;
+            margin-top: 2%;
+            font-family:'Lucida Console', fantasy;
             display: flex;
             justify-content: center; /* Center horizontally */
             align-items: center;     /* Center vertically */
-            height: fit-content;           /* Full viewport height */
+            height: fit-content;
             flex-direction: column;  /* Stack content vertically */
             text-align: center;      /* Center text */
         }
 
         /* Container for image */
         #imageContainer {
-            margin-top: 2%;
+            margin-top: 1%;
             width: fit-content;
-            display: flex;
+            max-height: fit-content;
             justify-content: center;
             align-items: center;
-            min-height: 100px;
         }
 
         #imageContainer img {
-            max-width: 100%;  /* Makes the image responsive */
-            max-height: 90vh;  /* Limits the height to 90% of the viewport height */
+            max-width: 70%;  /* Makes the image responsive */
+            max-height: 1%;  /* Limits the height inside of the viewport height */
             object-fit: contain;  /* Ensures the image retains its aspect ratio */
         }
 
         /* Style the heading */
         h1 {
             font-size: 2em;
-            margin-bottom: 20px;
+            margin-bottom: 2%;
         }
     </style>
 </head>
 <body>
-    <h1>Hurray!! We completed our Network CA1</h1>
+    <h1>Hurray!! We Completed Our Network CA1 Successfully!</h1>
+    
 
     <div id="imageContainer">
         <!-- The random image will be displayed here -->
     </div>
 
     <script>
-        // Array of image URLs (local images in the 'images' folder)
+        // Array of image URLs
         const images = [
             "https://media3.giphy.com/media/65HR2UL6nn6XMSUoRA/giphy.gif?cid=6c09b952pb6noci7ya5qoltshnmshssypjy6hzs75ddyffht&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g",
             "https://media1.giphy.com/media/l49JY8n2jOsXYVXLq/giphy.gif?cid=6c09b952mddvq5ph1x81dqnwr7x2vonaj2j8pnuwe2w46uch&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g",   
             "https://media2.giphy.com/media/NT0J3J6lUeOgVU70aU/giphy.gif?cid=6c09b9524a683dec75ez98mhl7ojtdq13nnhrxsrhrr6hap5&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g",
             "https://media4.giphy.com/media/J65pdOUXTyG1q/giphy.gif?cid=6c09b9524hmatg6dp018uyawqiwyrqfbae2n1dqufhqizhtb&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g",
             "https://media2.giphy.com/media/kyLYXonQYYfwYDIeZl/giphy.gif?cid=6c09b9529tfbq7lqyfswego0mlrhzvjzz6v9cbybmdvw5mbu&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g",
+            "https://media.giphy.com/media/VZFaMHD8goPQyKKm2P/giphy.gif?cid=ecf05e47ubx4zwgtmuy423tb7q3ubp6mem7k3e6wgofnwvgn&ep=v1_gifs_related&rid=giphy.gif&ct=g",
+            "https://media.giphy.com/media/NPXkCN2FutVO1Nt4P9/giphy.gif?cid=ecf05e47fzaoems8j88902woh1pf9559uvb1f85v7nayimxs&ep=v1_gifs_related&rid=giphy.gif&ct=g",
             "https://media0.giphy.com/media/t2sKa4JKNW9DawxAYi/giphy.gif?cid=6c09b952810qdlb8f6dcbthk8xzq5eek4gqrwnp10owrkvja&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g"
         ];
 
@@ -67,7 +69,7 @@
             // Debug: Log the image URL to ensure it's correct
             console.log("Selected Image URL: " + randomImageUrl);
 
-            // Create an img element and set its src attribute
+            // Create an image element and set its src attribute
             const imgElement = document.createElement("img");
             imgElement.src = randomImageUrl;
             imgElement.alt = "Random Image";
@@ -89,8 +91,10 @@
             imageContainer.appendChild(imgElement);
         }
 
-        // Call the function to generate and display a random image when the page loads
+        // Call the function to generate and display a random image when the page loads/ reloads
         window.onload = generateRandomImage;
+        
     </script>
+    <h2>By Anish Suresh Pimple, Manjunath Jnanadev, Dhathri Vishwanath, Clifton Claudius Vaz</h2>
 </body>
 </html>
