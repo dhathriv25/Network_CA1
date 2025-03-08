@@ -8,7 +8,7 @@
               "ImageId": {
                   "Fn::Sub": "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}"
               },
-              "KeyName": "Private-key",
+              "KeyName": "Security-key",
               "InstanceType": "t2.micro",
               "IamInstanceProfile": "EC2-CloudFormation-Role",
               "SecurityGroupIds": [{ "Fn::GetAtt": ["WebServerSecurityGroup", "GroupId"] }],
